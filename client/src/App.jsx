@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import './index.css';
 
@@ -26,6 +26,7 @@ function App() {
                     analysis_type: analysisType
                 });
                 setAnalysisResult(response.data.result);
+                console.log(response.data.result);
             } catch (error) {
                 console.error('Error analyzing resume:', error);
                 setAnalysisResult('Error analyzing resume.');
@@ -36,64 +37,73 @@ function App() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-base-200">
-            <h1 className="text-3xl font-bold mb-8">ATS Resume Analyzer</h1>
-            <div className="w-full max-w-lg">
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Job Description</span>
-                    </label>
-                    <textarea
-                        className="textarea textarea-bordered h-24"
-                        value={jobDescription}
-                        onChange={(e) => setJobDescription(e.target.value)}
-                        placeholder="Enter the job description here..."
-                    />
+        <div className="min-h-screen flex flex-col bg-base-200 text-base-content">
+            <nav className="bg-base-100 p-4 shadow-md">
+                <div className="container mx-auto flex justify-between items-center">
+                    <h1 className="text-xl font-bold">Personal ATS Resume Scanner</h1>
                 </div>
+            </nav>
 
-                <div className="form-control w-full max-w-xs mt-4">
-                    <label className="label">
-                        <span className="label-text">Upload Resume (PDF)</span>
-                    </label>
-                    <input
-                        type="file"
-                        className="file-input file-input-bordered w-full max-w-xs"
-                        accept=".pdf"
-                        onChange={handleFileUpload}
-                    />
+            <main className="flex-grow p-6">
+                <div className="container mx-auto flex">
+                    <div className="w-2/5 p-4 bg-base-100 rounded-lg shadow-lg">
+                        <div className="form-control w-full">
+                            <label className="label">
+                                <span className="label-text">Job Description</span>
+                            </label>
+                            <textarea
+                                className="textarea textarea-bordered h-24"
+                                value={jobDescription}
+                                onChange={(e) => setJobDescription(e.target.value)}
+                                placeholder="Enter the job description here..."
+                            />
+                        </div>
+
+                        <div className="form-control w-full mt-4">
+                            <label className="label">
+                                <span className="label-text">Upload Resume (PDF)</span>
+                            </label>
+                            <input
+                                type="file"
+                                className="file-input file-input-bordered w-full"
+                                accept=".pdf"
+                                onChange={handleFileUpload}
+                            />
+                        </div>
+
+                        <div className="form-control w-full mt-4">
+                            <label className="label">
+                                <span className="label-text">Select Analysis Type</span>
+                            </label>
+                            <select
+                                className="select select-bordered"
+                                value={analysisType}
+                                onChange={(e) => setAnalysisType(e.target.value)}
+                            >
+                                <option value="" disabled>Select one</option>
+                                <option value="tell_me_about_resume">Tell Me About the Resume</option>
+                                <option value="percentage_match">Percentage Match</option>
+                            </select>
+                        </div>
+
+                        <button
+                            onClick={handleSubmit}
+                            className="btn btn-primary w-full mt-4"
+                        >
+                            Analyze Resume
+                        </button>
+                    </div>
+
+                    <div className="w-3/5 p-4 bg-base-100 rounded-lg shadow-lg ml-6">
+                        <h2 className="text-lg font-bold mb-4">Analysis Result</h2>
+                        {analysisResult ? (
+                            <div dangerouslySetInnerHTML={{ __html: analysisResult }} />
+                        ) : (
+                            <p>No analysis available yet. Please upload a resume and job description, then click "Analyze Resume".</p>
+                        )}
+                    </div>
                 </div>
-
-                <div className="form-control w-full max-w-xs mt-4">
-                    <label className="label">
-                        <span className="label-text">Select Analysis Type</span>
-                    </label>
-                    <select
-                        className="select select-bordered"
-                        value={analysisType}
-                        onChange={(e) => setAnalysisType(e.target.value)}
-                    >
-                        <option value="" disabled>Select one</option>
-                        <option value="tell_me_about_resume">Tell Me About the Resume</option>
-                        <option value="percentage_match">Percentage Match</option>
-                    </select>
-                </div>
-
-                <button
-                    onClick={handleSubmit}
-                    className="btn btn-primary w-full max-w-xs mt-4"
-                >
-                    Analyze Resume
-                </button>
-
-                <div className="mt-6 p-4 bg-base-100 rounded-lg shadow">
-                    <h2 className="text-lg font-bold mb-2">Analysis Result</h2>
-                    {analysisResult ? (
-                        <p>{analysisResult}</p>
-                    ) : (
-                        <p>No analysis available yet. Please upload a resume and job description, then click "Analyze Resume".</p>
-                    )}
-                </div>
-            </div>
+            </main>
         </div>
     );
 }

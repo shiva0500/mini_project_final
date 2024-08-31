@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configure the Generative AI model with the API key
-api_key = "GOOGLE_API_KEY"
+api_key = "GGOGLE_API_KEY"
 genai.configure(api_key=api_key)
 
 # Initialize Flask app
@@ -61,15 +61,22 @@ def analyze_resume():
         # Define the prompt based on analysis type
         if analysis_type == "tell_me_about_resume":
             input_prompt = """
-            You are an experienced Technical Human Resource Manager. Your task is to review the provided resume against the job description. 
-            Please share your professional evaluation on whether the candidate's profile aligns with the role. 
-            Highlight the strengths and weaknesses of the applicant in relation to the specified job requirements.
+            As a seasoned Technical HR Manager, you have a keen eye for detail and an understanding of what makes a candidate stand out. Analyze the provided resume in relation to the job description and craft a professional review in HTML format. Your evaluation should include:
+            - **Strengths**: Highlight key strengths that make the candidate a good fit.
+            - **Weaknesses**: Identify areas where the candidate's resume might fall short.
+            - **Recommendations**: Offer actionable advice on how the candidate can enhance their application.
+
+            Present your findings in a well-organized HTML format that makes it easy to digest and understand the candidate's alignment with the role.
             """
         elif analysis_type == "percentage_match":
             input_prompt = """
-            You are a skilled ATS (Applicant Tracking System) scanner with a deep understanding of data science and ATS functionality. 
-            Your task is to evaluate the resume against the provided job description. Provide the percentage match if the resume matches
-            the job description. First, the output should come as a percentage, followed by missing keywords, and finally, your overall thoughts.
+            As an expert ATS scanner, your mission is to decode the compatibility of the resume with the job description. Analyze the provided documents and deliver your insights in HTML format. Include:
+            - **Percentage Match**: Provide a precise percentage indicating how well the resume aligns with the job description.
+            - **Missing Keywords**: List keywords or phrases that are absent but critical for the role.
+            - **Overall Thoughts**: Share your comprehensive view on the candidate's suitability for the position.
+
+            Ensure your response is formatted in HTML for clear presentation and easy integration into the application.
+
             """
         else:
             return jsonify({"error": "Invalid analysis type"}), 400
