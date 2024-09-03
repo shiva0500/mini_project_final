@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configure the Generative AI model with the API key
-api_key = "GGOGLE_API_KEY"
+api_key = "GOOGLE_API_KEY"
 genai.configure(api_key=api_key)
 
 # Initialize Flask app
@@ -61,7 +61,7 @@ def analyze_resume():
         # Define the prompt based on analysis type
         if analysis_type == "tell_me_about_resume":
             input_prompt = """
-            As a seasoned Technical HR Manager, you have a keen eye for detail and an understanding of what makes a candidate stand out. Analyze the provided resume in relation to the job description and craft a professional review in HTML format. Your evaluation should include:
+            As a seasoned Technical HR Manager, you have a keen eye for detail and an understanding of what makes a candidate stand out. Analyze the provided resume in relation to the job description and craft a professional review in HTML format(use only text tags, list tags,table tags). Your evaluation should include:
             - **Strengths**: Highlight key strengths that make the candidate a good fit.
             - **Weaknesses**: Identify areas where the candidate's resume might fall short.
             - **Recommendations**: Offer actionable advice on how the candidate can enhance their application.

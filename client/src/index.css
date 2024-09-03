@@ -3,3 +3,14 @@
 @tailwind utilities;
 
 
+  
+  /* Analysis Result */
+  .analysis-content {
+   
+    word-wrap: break-word; /* Ensure long words or URLs wrap within the box */
+  }
+  
+  .overflow-auto {
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+  }
+  
