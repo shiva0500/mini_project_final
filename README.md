@@ -1,6 +1,4 @@
-﻿# mini_project_final
-
-# ATS Resume Analyzer
+# Personal-Resume-Scanner-using-Google-Gemini
 
 **ATS Resume Analyzer** is a web application designed to evaluate resumes against job descriptions using advanced AI technology. Built with React.js for the frontend and Flask for the backend, this tool integrates with Google’s Gemini API to provide insightful analysis on how well a resume matches a given job description.
 
