@@ -93,6 +93,3 @@ Contributions are welcome! Please open an issue or submit a pull request to help
 
 For questions or feedback, please reach out to [doddishivads@gmail.com].
 
----
-
-Feel free to adjust the details to better fit your specific project and repository setup!
